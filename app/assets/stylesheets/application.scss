@@ -173,3 +173,12 @@ input[type="checkbox"] {
 	-moz-appearance: none;
 	-webkit-appearance: none;	
 }
+
+input[type="checkbox"]:checked:before {
+	content: '\2713' ;
+	font-size: 0.95em;
+	position: absolute;
+	text-align: center;
+	width: 1.25em;
+	color: #ff5a5f;
+}

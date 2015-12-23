@@ -131,3 +131,45 @@ margin-bottom: 25px;
 	font-weight: bold;
 	text-decoration: none;
 }
+
+label {
+	color: #565a5c;
+	font-size: 1.1em;
+	font-weight: 500;
+	margin-bottom: 10px
+}
+
+select {
+	color: #565a5c;
+	background-color: #fff;
+	width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	padding: 10px;
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;	
+}
+
+.select:before {
+	content: '\25bc';
+	font-size: 1.2em;
+	position: absolute;
+	color: #82888A;
+	top: 40px;
+	right: 30px;
+	transform: scale(0.84, 0.42);
+}
+
+input[type="checkbox"] {
+	height: 1.25em;
+	width: 1.25em;
+	margin-bottom: -0.25em;
+	margin-right: 5px;
+	vertical-align: top;
+	border: 1px solid #c4c4c4;
+	border-radius: 2px;
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;	
+}

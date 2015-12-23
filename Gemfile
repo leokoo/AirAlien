@@ -25,6 +25,7 @@ group :development, :test do
   gem 'byebug'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'paperclip'
 end
 
 group :development do

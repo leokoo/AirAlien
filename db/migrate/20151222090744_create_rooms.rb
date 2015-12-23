@@ -15,6 +15,7 @@ class CreateRooms < ActiveRecord::Migration
       t.boolean :is_heating
       t.boolean :is_internet
       t.integer :price
+      t.boolean :active
       t.references :user, index: true, foreign_key: true
 
       t.timestamps null: false

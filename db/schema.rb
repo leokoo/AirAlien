@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20151222090744) do
     t.boolean  "is_heating"
     t.boolean  "is_internet"
     t.integer  "price"
+    t.boolean  "active"
     t.integer  "user_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false

@@ -1,17 +1,5 @@
 Rails.application.routes.draw do
-  get 'rooms/index'
 
-  get 'rooms/show'
-
-  get 'rooms/new'
-
-  get 'rooms/create'
-
-  get 'rooms/edit'
-
-  get 'rooms/update'
-
-  root 'pages#home'
   devise_for  :users, 
               :path => '', 
               :path_names => {:sign_in => 'login', :sign_out => 'logout', :edit => 'profile'},
@@ -20,6 +8,7 @@ Rails.application.routes.draw do
                               }
 
   resources :users, only: [:show]
+  resources :rooms
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

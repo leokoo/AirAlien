@@ -20,6 +20,7 @@ class RoomsController < ApplicationController
       redirect_to @room, notice: "Saved!"
     else
       render :new
+    end
   end
 
   def edit

@@ -18,14 +18,15 @@ class RoomsController < ApplicationController
     @room = current_user.rooms.build(room_params)
 
     if @room.save
-      if params[:images]
+
+      if params[:images] 
         params[:images].each do |image|
-          @room.photos.create[image: image]
+          @room.photos.create(image: image)
         end
       end
 
       @photos = @room.photos
-      redirect_to edit_room_path(@room), notice: "Saved!"
+      redirect_to edit_room_path(@room), notice: "Saved..."
     else
       render :new
     end
@@ -35,19 +36,20 @@ class RoomsController < ApplicationController
     if current_user.id == @room.user.id
       @photos = @room.photos
     else
-      redirect_to root_path, notice: "You don't have access to edit"
+      redirect_to root_path, notice: "You don't have permission."
     end
   end
 
   def update
     if @room.update(room_params)
-      if params[:images]
+
+      if params[:images] 
         params[:images].each do |image|
-          @room.photos.create[image: image]
+          @room.photos.create(image: image)
         end
       end
 
-      redirect_to edit_room_path(@room), notice: "Updated!"
+      redirect_to edit_room_path(@room), notice: "Updated..."
     else
       render :edit
     end

@@ -175,39 +175,39 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked:before {
-	content: '\2713' ;
-	font-size: 0.95em;
-	position: absolute;
-	text-align: center;
-	width: 1.25em;
-	color: #ff5a5f;
+  content: "\2713";
+  position: absolute;
+  font-size: 0.95em;
+  text-align: center;
+  width: 1.25em;
+  color: #ff5a5f;
 }
 
 .btn-file {
-	position: relative;
-	overflow: hidden;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-file input[type=file] {
-	position: absolute;
-	top: 0;
-	right: 0;
-	min-width: 100%;
-	min-height: 100%;
-	font-size: 100px;
-	text-align: right;
-	filter: alpha(opacity-0);
-	opacity: 0;
-	outline: none;
-	background: white;
-	cursor: inherit;
-	display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
 }
 
 .panel-heading.preview {
-	padding: 0;
+  padding: 0;
 }
 
-.panel-heading.preview img {
-	width: 100%;
+.panel-heading.preview img{  
+  width: 100%;
 }

@@ -1,2 +1,130 @@
-<h1>Rooms#show</h1>
-<p>Find me in app/views/rooms/show.html.erb</p>
+<div class="panel panel-default">
+	<div class="panel-body">
+		
+		<!-- image -->
+		<div class="row">
+			<div class="col-md-12">
+				<%= image_tag @photos[0].image.url(), class: "img-responsive"  if @photos.length > 0 %>
+			</div>
+		</div>
+
+		<br>
+
+		<!-- Main Info -->
+		<div class="row">
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col-md-3 text-center">
+						<%= image_tag avatar_url(@room.user), class: "img-circle avatar-large" %><br><br>
+						<%= @room.user.fullname %>
+					</div>
+
+					<div class="col-md-9">
+						<h4><%= @room.listing_name %></h4>
+						<%= @room.address %>
+
+						<div class="row text-center row-space-1">
+							<div class="col-sm-3">
+								<i class="fa fa-home fa-2x"></i>
+							</div>
+							<div class="col-sm-3">
+								<i class="fa fa-users fa-2x"></i>
+							</div>
+							<div class="col-sm-3">
+								<i class="fa fa-bed fa-2x"></i>
+							</div>							
+							<div class="col-sm-3">
+								<i class="fa fa-ship fa-2x"></i>
+							</div>
+						</div>
+
+						<div class="row text-center">
+							<div class="col-sm-3">
+								<%= @room.home_type %>
+							</div>
+							<div class="col-sm-3">
+								<%= @room.accomodate %> <%= @room.accomodate > 1? "Guests" : "Guest" %>
+							</div>
+							<div class="col-sm-3">
+								<%= @room.bed_room %> <%= @room.bed_room > 1? "Bedrooms" : "bed_room" %>
+							</div>							
+							<div class="col-sm-3">
+								<%= @room.bath_room %> <%= @room.bath_room > 1? "Bathrooms" : "Bathroom" %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<!-- Reservation form -->
+			</div>
+		</div>
+
+		<!-- About -->
+		<div class="row">
+			<div class="col-md-12">
+				<h2>About This Listing</h2>
+				<p><%= @room.summary %></p>
+			</div>
+		</div>
+
+		<!-- Amenities -->
+		<div class="row">
+			<div class="col-md-2">
+				<p>Amenities</p>
+			</div>
+			<div class="col-md-10">
+				<div class="row">
+					<div class="col-md-6">
+						<ul class="amenities">
+							<li class="<%= 'text-line-through' if !@room.is_tv %>">TV</li>
+							<li class="<%= 'text-line-through' if !@room.is_kitchen %>">Kitchen</li>
+							<li class="<%= 'text-line-through' if !@room.is_internet %>">Internet</li>
+						</ul>
+					</div>
+					<div class="col-md-6">
+							<li class="<%= 'text-line-through' if !@room.is_heating %>">Heating</li>
+							<li class="<%= 'text-line-through' if !@room.is_air %>">Air Conditioning</li>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Carousel -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div id="myCarousel" class="carousel slide" data-ride="carousel">
+				  <!-- Indicators -->
+					<% if @photos %>
+				  <ol class="carousel-indicators">
+				  	<% @photos.each do |photo| %>
+				    <li data-target="#myCarousel" data-slide-to="<%= photo.id %>"></li>
+				    <% end %>
+				  </ol>
+				  <% end %>
+				  <!-- Wrapper for slides -->
+				  <div class="carousel-inner" role="listbox">
+				    <% if @photos %>
+				    	<% @photos.each do |photo| %>
+						    <div class="item <%= 'active' if photo.id == @photos[0].id %>">
+						      <%= image_tag photo.image.url() %>
+						    </div>
+						  <% end %>
+				    <% end %>
+				  </div>
+
+				  <!-- Left and right controls -->
+				  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+				    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				    <span class="sr-only">Previous</span>
+				  </a>
+				  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+				    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				    <span class="sr-only">Next</span>
+				  </a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

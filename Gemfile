@@ -19,13 +19,15 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'figaro'
 gem 'toastr-rails'
+gem 'paperclip'
+gem 'geocoder'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'paperclip'
+
 end
 
 group :development do

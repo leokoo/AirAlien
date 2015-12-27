@@ -37,7 +37,15 @@
 <% end %>
 
 <script>
+
+function unavailable(date) {
+	dny = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
+	return [$.inArray(dny, unavailableDates) == -1];
+}
+
 	$(function() {
+
+		unavailableDates = [];
 
 		$.ajax({
 			url: '/preload',
@@ -47,17 +55,22 @@
 
 				$.each(data, function(arrID, arrValue) {
 					for(var d = new Date(arrValue.start_date); d <= new Date(arrValue.end_date); d.setDate(d.getDate()+1)) {
-
+						unavailableDates.push($.datepicker.formatDate('d-m-yy', d));
 					}
-				})
+				});
+				$('#reservation_start_date').datepicker({
+					dateFormat: 'dd-mm-yy',
+					minDate: 0,
+					maxDate: '3m',
+					beforeShowDay: unavailable
+				});
+				$('#reservation_end_date').datepicker({
+					dateFormat: 'dd-mm-yy'
+					minDate: 0,
+					maxDate: '3m',
+					beforeShowDay: unavailable
+				});					
 			}
 		});
-
-		$('#reservation_start_date').datepicker({
-			dateFormat: 'dd-mm-yy'
-		});
-		$('#reservation_end_date').datepicker({
-			dateFormat: 'dd-mm-yy'
-		});		
 	});
 </script>

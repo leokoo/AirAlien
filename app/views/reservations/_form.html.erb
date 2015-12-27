@@ -1,5 +1,11 @@
 <%= form_for([@room, @room.reservations.new]) do |f| %>
 	<div class="row">
+		<div class="col-md-12 price_tag">
+			<span><%= @room.price %></span>
+			<span class="pull-right">Per Night</span>
+		</div>
+	</div>
+	<div class="row">
 		<div class="col-md-6">
 			<label>Check In</label>
 			<%= f.text_field :start_date, readonly: 'true', placeholder: 'Start Date', class: 'form-control' %>
@@ -14,8 +20,9 @@
 	<%= f.hidden_field :price, value: @room.price %>	
 	<%= f.hidden_field :total, id: 'reservation_total' %>
 
+	<h4><span id="message"></span></h4>
+
 	<div id="preview" style="display: none">
-		<h4><span id="message"></span></h4>
 
 		<table class="reservation-table">
 			<tbody>
@@ -25,14 +32,14 @@
 				</tr>
 				<tr>
 					<td>Total</td>
-					<td><span id="reservation_sum"></span></td>
+					<td>RM<span id="reservation_sum"></span></td>
 				</tr>
 			</tbody>
 		</table>
+		<br>
 	</div>
 
-	<br>
-	<%= f.submit "Book Now", class: "btn btn-primary wide", disabled: "true" %>
+	<%= f.submit "Book Now", id: "btn-book", class: "btn btn-primary wide", disabled: "true" %>
 	
 <% end %>
 
@@ -66,19 +73,10 @@
 					onSelect: function(selected) {
 						$('#reservation_end_date').datepicker("option", "minDate", selected);
 						$('#reservation_end_date').attr('disabled', false);
-					}
-				});
 
-				$('#reservation_end_date').datepicker({
-					dateFormat: 'dd-mm-yy',
-					minDate: 0,
-					maxDate: '3m',
-					beforeShowDay: unavailable,
-					onSelect: function(selected) {
-						$('#reservation_start_date').datepicker("option", "maxDate", selected);
-					
-						var start_date = $('#reservation_start_date').datepicker('getDate');
-						var end_date = $(this).datepicker('getDate');
+						var start_date = $(this).datepicker('getDate');
+						var end_date = $('#reservation_end_date').datepicker('getDate');
+						var days = (end_date - start_date)/1000/60/60/24 + 1;
 
 						var input = {
 							'start_date': start_date,
@@ -96,12 +94,59 @@
 									$('#preview').hide();
 									$('#btn_book').attr('disabled', true);
 								} else {
-									$('#message').text("This date range is OK");
 									$('#preview').show();
-									$('#btn_book').attr('disabled', false);									
+									$('#btn_book').attr('disabled', false);
+
+									var total = days * <%= @room.price %>
+									$('#reservation_days').text(days);
+									$('#reservation_sum').text(total);
+									$('#reservation_total').val(total);		
 								}
 							}
 						});
+
+					}
+				});
+
+				$('#reservation_end_date').datepicker({
+					dateFormat: 'dd-mm-yy',
+					minDate: 0,
+					maxDate: '3m',
+					beforeShowDay: unavailable,
+					onSelect: function(selected) {
+						$('#reservation_start_date').datepicker("option", "maxDate", selected);
+					
+						var start_date = $('#reservation_start_date').datepicker('getDate');
+						var end_date = $(this).datepicker('getDate');
+						var days = (end_date - start_date)/1000/60/60/24 + 1;
+
+						var input = {
+							'start_date': start_date,
+							'end_date': end_date,
+							'room_id': <%= @room.id %>
+						}
+
+						$.ajax({
+							url: "/preview",
+							data: input,
+							success: function(data) {
+
+								if (data.conflict) {
+									$('#message').text("This date range isn't available");
+									$('#preview').hide();
+									$('#btn_book').attr('disabled', true);
+								} else {
+									$('#preview').show();
+									$('#btn_book').attr('disabled', false);
+
+									var total = days * <%= @room.price %>
+									$('#reservation_days').text(days);
+									$('#reservation_sum').text(total);
+									$('#reservation_total').val(total);		
+								}
+							}
+						});
+
 					}					
 				});
 			}

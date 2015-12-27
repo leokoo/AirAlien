@@ -40,7 +40,7 @@
 
 function unavailable(date) {
 	dny = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
-	return [$.inArray(dny, unavailableDates) == -1];
+	return [$.inArray(dmy, unavailableDates) == -1];
 }
 
 	$(function() {

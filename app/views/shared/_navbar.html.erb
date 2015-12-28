@@ -22,8 +22,9 @@
             <%= current_user.fullname %><span class="caret"></span></a>
             
             <ul class="dropdown-menu">
-              <li><a href="#">Your Trips</a></li>
-              <li><a href="#">Wish Lists</a></li>
+              <li><%= link_to "Your Listings", rooms_path %></li>
+              <li><%= link_to "Your Reservations", your_reservations_path %></li>
+              <li><%= link_to "Your Trips", your_trips_path %></li>
               <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
               <li role="separator" class="divider"></li>
               <li><a href="#">Account Settings</a></li>
